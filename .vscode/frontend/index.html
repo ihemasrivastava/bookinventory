@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book App</title>
+</head>
+<body>
+
+  <h1>📚 Book management inventory shop</h1>
+
+  <input type="text" id="title" placeholder="Book Title">
+  <input type="text" id="author" placeholder="Author">
+  <input type="number" id="price" placeholder="Price">
+  <button onclick="addBook()">Add Book</button>
+
+  <ul id="bookList"></ul>
+
+  <script>
+    const API = "http://localhost:3000/books";
+
+    // Get books
+    async function getBooks() {
+      const res = await fetch(API);
+      const data = await res.json();
+
+      const list = document.getElementById("bookList");
+      list.innerHTML = "";
+
+      data.forEach(book => {
+        const li = document.createElement("li");
+        li.innerText = book.title + " - " + book.author;
+        list.appendChild(li);
+      });
+    }
+
+    // Add book
+    async function addBook() {
+      const title = document.getElementById("title").value;
+      const author = document.getElementById("author").value;
+      const price = parseFloat(document.getElementById("price").value);
+
+      await fetch(API, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ title, author, price })
+      });
+
+      getBooks();
+      document.getElementById("title").value = "";
+      document.getElementById("author").value = "";
+      document.getElementById("price").value = "";
+    }
+
+    getBooks();
+  </script>
+
+</body>
+</html>

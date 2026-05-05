@@ -1,0 +1,31 @@
+Task:
+Create Book Management APIs using:
+● Node.js
+● Express
+● MongoDB
+● Mongoose
+Book Schema:
+{
+title: String,
+author: String,
+price: Number,
+available: Boolean
+}
+
+APIs:
+● POST /books
+● GET /books
+● GET /books/:id
+● PUT /books/:id
+● DELETE /books/:id
+Constraints:
+● All fields required except available
+● Default value of available should be true
+● price must be greater than 0
+● Return proper status codes
+
+Bonus:
+Create API:
+GET /books/available
+
+Return all available books.
